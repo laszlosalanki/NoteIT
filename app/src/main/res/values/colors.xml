@@ -12,6 +12,7 @@
     <color name="color_primary">#344955</color>
     <color name="color_primary_dark">#232F34</color>
     <color name="color_primary_light">#4A6572</color>
+    <color name="color_primary_lighter">#759EB1</color>
     <color name="color_secondary">#F9AA33</color>
     <color name="color_secondary_light">#FFCB30</color>
 </resources>

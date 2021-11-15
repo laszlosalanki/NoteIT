@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">NoteIT</string>
+    <string name="welcome_text">Welcome to NoteIT!</string>
+    <string name="welcome_text_func">Where you can manage your important thoughts.</string>
+    <string name="welcome_lets_get_started">Let\'s get started...</string>
+    <string name="begin">Begin</string>
 </resources>

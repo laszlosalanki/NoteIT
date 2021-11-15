@@ -13,9 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoteIT">
         <activity
-            android:name=".welcome.WelcomeActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
