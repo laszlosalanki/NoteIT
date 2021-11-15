@@ -5,5 +5,5 @@
     <dimen name="welcome_text_func_margin_top">70dp</dimen>
     <dimen name="welcome_text_lets_margin_top">30dp</dimen>
     <dimen name="begin_button_margin">30dp</dimen>
-    <dimen name="welcome_text_rest_size">7pt</dimen>
+    <dimen name="welcome_text_rest_size">8pt</dimen>
 </resources>
