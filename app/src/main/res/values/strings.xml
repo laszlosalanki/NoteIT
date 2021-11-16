@@ -2,6 +2,10 @@
     <string name="app_name">NoteIT</string>
     <string name="welcome_text">Welcome to NoteIT!</string>
     <string name="welcome_text_func">Where you can manage your important thoughts.</string>
-    <string name="welcome_lets_get_started">Let\'s get started...</string>
+    <string name="welcome_lets_get_started">Let\'s get started…</string>
     <string name="begin">Begin</string>
+    <string name="creation_date">Creation date:</string>
+    <string name="category">Category:</string>
+    <string name="notes">Notes</string>
+    <string name="my_notes">My notes</string>
 </resources>

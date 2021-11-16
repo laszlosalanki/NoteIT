@@ -1,4 +1,10 @@
 package hu.unideb.noteit.database
 
-class Note {
-}
+import java.util.*
+
+data class Note(
+    val id: Int,
+    val noteName: String,
+    val creationDate: Date,
+    val category: String
+)

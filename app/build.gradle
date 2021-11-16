@@ -62,7 +62,12 @@ dependencies {
     implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
 
+    //Shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'com.todkars:shimmer-recyclerview:0.4.0'
 
+    //SpeedDial
+    implementation "com.leinardi.android:speed-dial:3.2.0"
 
     //Test
     testImplementation 'junit:junit:4.+'

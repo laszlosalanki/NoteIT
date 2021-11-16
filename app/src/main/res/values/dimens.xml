@@ -6,4 +6,10 @@
     <dimen name="welcome_text_lets_margin_top">30dp</dimen>
     <dimen name="begin_button_margin">30dp</dimen>
     <dimen name="welcome_text_rest_size">8pt</dimen>
+    <dimen name="note_margin_distance">20dp</dimen>
+    <dimen name="note_list_item_margin_top">20dp</dimen>
+    <dimen name="note_list_item_margin_start">20dp</dimen>
+    <dimen name="note_list_item_margin_end">20dp</dimen>
+    <dimen name="note_list_item_date_margin_top">8dp</dimen>
+    <dimen name="note_list_item_exact_date_margin_start">10dp</dimen>
 </resources>

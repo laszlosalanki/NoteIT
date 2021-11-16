@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -8,15 +9,28 @@
             type="hu.unideb.noteit.notes.NotesViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".notes.NotesFragment">
+        android:layout_height="match_parent">
 
-        <TextView
+        <com.todkars.shimmer.ShimmerRecyclerView
+            android:id="@+id/shimmerRecyclerViewNotes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello" />
+            app:shimmer_recycler_item_count="3"
+            android:contentDescription="@string/notes"
+            android:background="@color/color_primary_dark"
+            tools:listitem="@layout/note_list_item"
+            app:shimmer_recycler_layout="@layout/placeholder_notes_layout"/>
 
-    </FrameLayout>
+        <com.leinardi.android.speeddial.SpeedDialView
+            android:id="@+id/speedDialNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:sdMainFabClosedSrc="@drawable/ic_baseline_add_24"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
