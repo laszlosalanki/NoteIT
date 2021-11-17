@@ -37,7 +37,7 @@ class NotesFragment : Fragment() {
         recyclerView = binding.shimmerRecyclerViewNotes
         speedDialView = binding.speedDialNotes
         setSpeedDial()
-
+        setRecyclerView()
         return binding.root
     }
 
@@ -53,11 +53,6 @@ class NotesFragment : Fragment() {
         notesList.add(Note(2, "Test note 2", Date(), "test"))
 
         recyclerView?.adapter = NotesListAdapter(requireContext(), notesList)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        setRecyclerView()
     }
 
 }

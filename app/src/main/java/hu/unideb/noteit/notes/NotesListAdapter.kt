@@ -21,7 +21,7 @@ class NotesListAdapter(private val context: Context, private val dataSet: ArrayL
     }
 
     override fun onBindViewHolder(holder: NotesListViewHolder, position: Int) {
-        holder.noteName?.text = dataSet[position].noteName
+        holder.noteName?.text = dataSet[position].title
         holder.dateOfCreation?.text = dataSet[position].creationDate.time.toString()
         holder.category?.text = dataSet[position].category
     }
