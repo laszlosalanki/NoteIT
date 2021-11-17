@@ -1,73 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/note_margin_distance"
-    android:background="@color/color_primary"
-    android:layout_marginTop="10dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/viewNoteTitle"
-        android:layout_width="0dp"
+    <data>
+        <variable
+            name="note"
+            type="hu.unideb.noteit.database.Note" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/note_list_item_margin_top"
-        android:layout_marginStart="@dimen/note_list_item_margin_start"
-        android:layout_marginEnd="@dimen/note_list_item_margin_end"
-        android:text="@tools:sample/lorem"
-        android:textColor="@color/color_secondary"
-        android:textSize="10pt"
-        android:ellipsize="end"
-        android:maxLines="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingBottom="@dimen/note_margin_distance"
+        android:background="@color/color_primary"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
 
-    <TextView
-        android:id="@+id/view6"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="@color/color_primary_lighter"
-        android:text="@string/creation_date"
-        android:layout_marginTop="@dimen/note_list_item_date_margin_top"
-        app:layout_constraintStart_toStartOf="@+id/viewNoteTitle"
-        app:layout_constraintTop_toBottomOf="@+id/viewNoteTitle" />
+        <TextView
+            android:id="@+id/viewNoteTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/note_list_item_margin_top"
+            android:layout_marginStart="@dimen/note_list_item_margin_start"
+            android:layout_marginEnd="@dimen/note_list_item_margin_end"
+            tools:text="@tools:sample/lorem"
+            app:title="@{note}"
+            android:textColor="@color/color_secondary"
+            android:textSize="10pt"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/viewCreationDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@tools:sample/date/mmddyy"
-        android:textColor="@color/color_primary_lighter"
-        android:layout_marginStart="@dimen/note_list_item_exact_date_margin_start"
-        app:layout_constraintBottom_toBottomOf="@+id/view6"
-        app:layout_constraintEnd_toEndOf="@+id/viewNoteTitle"
-        app:layout_constraintStart_toEndOf="@+id/view6"
-        app:layout_constraintTop_toTopOf="@+id/view6" />
+        <TextView
+            android:id="@+id/view6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_primary_lighter"
+            android:text="@string/creation_date"
+            android:layout_marginTop="@dimen/note_list_item_date_margin_top"
+            app:layout_constraintStart_toStartOf="@+id/viewNoteTitle"
+            app:layout_constraintTop_toBottomOf="@+id/viewNoteTitle" />
 
-    <TextView
-        android:id="@+id/view7"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/note_list_item_date_margin_top"
-        android:text="@string/category"
-        android:textColor="@color/color_primary_lighter"
-        app:layout_constraintEnd_toEndOf="@+id/view6"
-        app:layout_constraintStart_toStartOf="@+id/view6"
-        app:layout_constraintTop_toBottomOf="@+id/view6" />
+        <TextView
+            android:id="@+id/viewCreationDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:creationDate="@{note}"
+            android:text="@tools:sample/date/mmddyy"
+            android:textColor="@color/color_primary_lighter"
+            android:layout_marginStart="@dimen/note_list_item_exact_date_margin_start"
+            app:layout_constraintBottom_toBottomOf="@+id/view6"
+            app:layout_constraintEnd_toEndOf="@+id/viewNoteTitle"
+            app:layout_constraintStart_toEndOf="@+id/view6"
+            app:layout_constraintTop_toTopOf="@+id/view6" />
 
-    <TextView
-        android:id="@+id/viewCategory"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/note_list_item_exact_date_margin_start"
-        android:text="@tools:sample/cities"
-        android:textColor="@color/color_primary_lighter"
-        app:layout_constraintBottom_toBottomOf="@+id/view7"
-        app:layout_constraintEnd_toEndOf="@+id/viewCreationDate"
-        app:layout_constraintStart_toEndOf="@+id/view7"
-        app:layout_constraintTop_toTopOf="@+id/view7" />
+        <TextView
+            android:id="@+id/view7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/note_list_item_date_margin_top"
+            android:text="@string/category"
+            android:textColor="@color/color_primary_lighter"
+            app:layout_constraintEnd_toEndOf="@+id/view6"
+            app:layout_constraintStart_toStartOf="@+id/view6"
+            app:layout_constraintTop_toBottomOf="@+id/view6" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/viewCategory"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/note_list_item_exact_date_margin_start"
+            android:text="@tools:sample/cities"
+            app:category="@{note}"
+            android:textColor="@color/color_primary_lighter"
+            app:layout_constraintBottom_toBottomOf="@+id/view7"
+            app:layout_constraintEnd_toEndOf="@+id/viewCreationDate"
+            app:layout_constraintStart_toEndOf="@+id/view7"
+            app:layout_constraintTop_toTopOf="@+id/view7" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

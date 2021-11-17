@@ -18,13 +18,13 @@ interface NotesDatabaseDao {
     suspend fun get(id: Long): Note?
 
     @Query("SELECT * FROM notes_table ORDER BY id")
-    suspend fun getAllNotesIdOrdered(): LiveData<List<Note>>
+    fun getAllNotesIdOrdered(): LiveData<List<Note>>
 
     @Query("SELECT * FROM notes_table ORDER BY title ASC")
-    suspend fun getAllNotesTitleOrderedAsc(): LiveData<List<Note>>
+    fun getAllNotesTitleOrderedAsc(): LiveData<List<Note>>
 
     @Query("SELECT * FROM notes_table ORDER BY title DESC")
-    suspend fun getAllNotesTitleOrderedDesc(): LiveData<List<Note>>
+    fun getAllNotesTitleOrderedDesc(): LiveData<List<Note>>
 
     @Query("DELETE FROM notes_table")
     suspend fun clear()
