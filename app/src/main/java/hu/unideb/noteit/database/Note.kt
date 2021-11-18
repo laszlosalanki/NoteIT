@@ -13,5 +13,7 @@ data class Note(
     @ColumnInfo(name = "creation_time")
     val creationTime: Long = System.currentTimeMillis(),
     @ColumnInfo(name = "category")
-    val category: String = "Base"
+    val category: String = "Base",
+    @ColumnInfo(name = "text")
+    val text: String = "Blank"
 )
