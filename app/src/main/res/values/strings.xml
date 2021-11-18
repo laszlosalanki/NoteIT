@@ -8,4 +8,6 @@
     <string name="category">Category:</string>
     <string name="notes">Notes</string>
     <string name="my_notes">My notes</string>
+    <string name="add_note">Add note</string>
+    <string name="clear_notes">Clear notes</string>
 </resources>

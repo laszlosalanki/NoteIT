@@ -22,32 +22,33 @@
             tools:listitem="@layout/note_list_item"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-<!--        <com.leinardi.android.speeddial.SpeedDialView-->
-<!--            android:id="@+id/addNote"-->
+        <com.leinardi.android.speeddial.SpeedDialView
+            android:id="@+id/speedDial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:sdMainFabClosedSrc="@drawable/ic_baseline_more_horiz_24"/>
+
+<!--        <Button-->
+<!--            android:id="@+id/buttonAddSampleData"-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            android:onClick="@{() -> notesViewModel.onSaveNote()}"-->
+<!--            android:text="Add sample data"-->
 <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:sdMainFabClosedSrc="@drawable/ic_baseline_add_24"/>-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            android:onClick="@{() -> notesViewModel.onSaveNote()}"/>-->
 
-        <Button
-            android:id="@+id/buttonAddSampleData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add sample data"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="@{() -> notesViewModel.onSaveNote()}"/>
-
-        <Button
-            android:id="@+id/buttonClearSampleData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Clear sample data"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{() -> notesViewModel.onClear()}"/>
+<!--        <Button-->
+<!--            android:id="@+id/buttonClearSampleData"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Clear sample data"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            android:onClick="@{() -> notesViewModel.onClear()}"/>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

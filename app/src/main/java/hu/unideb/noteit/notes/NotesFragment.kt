@@ -1,5 +1,6 @@
 package hu.unideb.noteit.notes
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -9,7 +10,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.todkars.shimmer.ShimmerRecyclerView
@@ -45,40 +45,49 @@ class NotesFragment : Fragment() {
         val notesViewModel = ViewModelProvider(this, viewModelFactory).get(NotesViewModel::class.java)
 
 
-        //recyclerView = binding.shimmerRecyclerViewNotes
-        //speedDialView = binding.speedDialNotes
-        //setSpeedDial()
-        //etRecyclerView()
+        val speedDialActionItemAddNote = SpeedDialActionItem.Builder(R.id.addNote, R.drawable.ic_baseline_add_24)
+            .setLabel(R.string.add_note)
+            .setFabImageTintColor(Color.WHITE)
+            .setLabelClickable(true)
+            .create()
+
+        val speedDialActionItemClearNotes = SpeedDialActionItem.Builder(R.id.clearNotes, R.drawable.ic_baseline_clear_24)
+            .setLabel(R.string.clear_notes)
+            .setFabImageTintColor(Color.WHITE)
+            .setLabelClickable(true)
+            .create()
+
+        binding.speedDial.addActionItem(speedDialActionItemAddNote)
+        binding.speedDial.addActionItem(speedDialActionItemClearNotes)
+
+        binding.speedDial.setOnActionSelectedListener(SpeedDialView.OnActionSelectedListener { actionItem ->
+            when(actionItem.id){
+                R.id.addNote -> {
+                    notesViewModel.onSaveNote()
+                    return@OnActionSelectedListener false
+                }
+                R.id.clearNotes -> {
+                    notesViewModel.onClear()
+                    return@OnActionSelectedListener false
+                }
+            }
+            false
+        })
 
         binding.notesViewModel = notesViewModel
 
-        val adaper = NotesListAdapter()
-        binding.notesList.adapter = adaper
+        val adapter = NotesListAdapter()
+        binding.notesList.adapter = adapter
 
         notesViewModel.notes.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adaper.submitList(it)
+                adapter.submitList(it)
             }
         })
 
-        //binding.lifecycleOwner = viewLifecycleOwner
         binding.setLifecycleOwner( this )
 
         return binding.root
     }
-
-//    private fun setSpeedDial() {
-//        var speedDialActionItemAdd: SpeedDialActionItem.Builder()
-//    }
-//
-//    private fun setRecyclerView() {
-//        //recyclerView?.showShimmer()
-//        recyclerView?.layoutManager = LinearLayoutManager(requireContext())
-//
-//        notesList.add(Note(1, "Test note", Date(), "test"))
-//        notesList.add(Note(2, "Test note 2", Date(), "test"))
-//
-//        recyclerView?.adapter = NotesListAdapter(requireContext(), notesList)
-//    }
 
 }
