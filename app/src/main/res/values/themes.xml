@@ -25,4 +25,12 @@
         <item name="android:layout_marginEnd">20dp</item>
         <item name="android:textSize">@dimen/welcome_text_rest_size</item>
     </style>
+    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+        <item name="android:background">@color/color_primary</item>
+        <item name="android:textColor">@color/color_primary_lighter</item>
+    </style>
+    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+        <item name="android:background">@color/color_primary</item>
+        <item name="android:textColor">@color/color_primary_lighter</item>
+    </style>
 </resources>

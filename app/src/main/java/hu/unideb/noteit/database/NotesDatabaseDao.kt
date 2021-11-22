@@ -26,6 +26,9 @@ interface NotesDatabaseDao {
     @Query("SELECT * FROM notes_table ORDER BY title DESC")
     fun getAllNotesTitleOrderedDesc(): LiveData<List<Note>>
 
+    @Query("SELECT * FROM notes_table ORDER BY id DESC LIMIT 1")
+    suspend fun getActNote(): Note?
+
     @Query("DELETE FROM notes_table")
     suspend fun clear()
 

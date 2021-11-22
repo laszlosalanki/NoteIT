@@ -2,14 +2,14 @@ package hu.unideb.noteit.notes
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.Observer
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import com.todkars.shimmer.ShimmerRecyclerView
@@ -57,8 +57,15 @@ class NotesFragment : Fragment() {
             .setLabelClickable(true)
             .create()
 
+        val speedDialActionItemTest = SpeedDialActionItem.Builder(R.id.test, R.drawable.ic_baseline_architecture_24)
+            .setLabel(R.string.test)
+            .setFabImageTintColor(Color.WHITE)
+            .setLabelClickable(true)
+            .create()
+
         binding.speedDial.addActionItem(speedDialActionItemAddNote)
         binding.speedDial.addActionItem(speedDialActionItemClearNotes)
+        binding.speedDial.addActionItem(speedDialActionItemTest)
 
         binding.speedDial.setOnActionSelectedListener(SpeedDialView.OnActionSelectedListener { actionItem ->
             when(actionItem.id){
@@ -69,6 +76,10 @@ class NotesFragment : Fragment() {
                 R.id.clearNotes -> {
                     notesViewModel.onClear()
                     return@OnActionSelectedListener false
+                }
+                R.id.test -> {
+                    val navOptions = NavOptions.Builder().setPopUpTo(R.id.editNoteFragment, true).build()
+                    findNavController().navigate(NotesFragmentDirections.actionNotesFragmentToEditNoteFragment(), navOptions)
                 }
             }
             false

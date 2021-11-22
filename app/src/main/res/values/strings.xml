@@ -10,4 +10,12 @@
     <string name="my_notes">My notes</string>
     <string name="add_note">Add note</string>
     <string name="clear_notes">Clear notes</string>
+    <string name="title">Title:</string>
+    <string name="example_shopping">Shopping</string>
+    <string name="note">Note</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="clear">Clear</string>
+    <string name="test">Test</string>
+    <string name="edit_note">Edit note</string>
 </resources>
