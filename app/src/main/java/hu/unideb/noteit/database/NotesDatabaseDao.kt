@@ -34,4 +34,7 @@ interface NotesDatabaseDao {
 
     @Query("DELETE FROM notes_table WHERE id = :id")
     suspend fun deleteById(id: Long)
+
+    @Query("SELECT * FROM notes_table WHERE id = :key")
+    fun getNoteWithId(key: Long): LiveData<Note>
 }

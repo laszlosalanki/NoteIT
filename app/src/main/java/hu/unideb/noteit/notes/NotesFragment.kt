@@ -12,19 +12,12 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
-import com.todkars.shimmer.ShimmerRecyclerView
 import hu.unideb.noteit.R
-import hu.unideb.noteit.database.Note
 import hu.unideb.noteit.database.NotesDatabase
 import hu.unideb.noteit.databinding.FragmentNotesBinding
 import java.util.*
-import kotlin.collections.ArrayList
 
 class NotesFragment : Fragment() {
-
-    private var recyclerView: ShimmerRecyclerView? = null
-    private var speedDialView: SpeedDialView? = null
-    private var notesList = ArrayList<Note>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +25,8 @@ class NotesFragment : Fragment() {
     ): View {
         //Show the previously hidden actionbar
         (activity as AppCompatActivity).title = getString(R.string.my_notes)
-        (activity as AppCompatActivity).supportActionBar?.show()
+        //(activity as AppCompatActivity).supportActionBar?.show()
+        (activity as AppCompatActivity).supportActionBar?.hide()
 
         val binding: FragmentNotesBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_notes, container, false)
@@ -57,15 +51,15 @@ class NotesFragment : Fragment() {
             .setLabelClickable(true)
             .create()
 
-        val speedDialActionItemTest = SpeedDialActionItem.Builder(R.id.test, R.drawable.ic_baseline_architecture_24)
-            .setLabel(R.string.test)
-            .setFabImageTintColor(Color.WHITE)
-            .setLabelClickable(true)
-            .create()
+//        val speedDialActionItemTest = SpeedDialActionItem.Builder(R.id.test, R.drawable.ic_baseline_architecture_24)
+//            .setLabel(R.string.test)
+//            .setFabImageTintColor(Color.WHITE)
+//            .setLabelClickable(true)
+//            .create()
 
         binding.speedDial.addActionItem(speedDialActionItemAddNote)
         binding.speedDial.addActionItem(speedDialActionItemClearNotes)
-        binding.speedDial.addActionItem(speedDialActionItemTest)
+        //binding.speedDial.addActionItem(speedDialActionItemTest)
 
         binding.speedDial.setOnActionSelectedListener(SpeedDialView.OnActionSelectedListener { actionItem ->
             when(actionItem.id){
@@ -77,26 +71,37 @@ class NotesFragment : Fragment() {
                     notesViewModel.onClear()
                     return@OnActionSelectedListener false
                 }
-                R.id.test -> {
-                    val navOptions = NavOptions.Builder().setPopUpTo(R.id.editNoteFragment, true).build()
-                    findNavController().navigate(NotesFragmentDirections.actionNotesFragmentToEditNoteFragment(), navOptions)
-                }
+//                R.id.test -> {
+//                    val navOptions = NavOptions.Builder().setPopUpTo(R.id.editNoteFragment, true).build()
+//                    findNavController().navigate(NotesFragmentDirections.actionNotesFragmentToEditNoteFragment(), navOptions)
+//                }
             }
             false
         })
 
         binding.notesViewModel = notesViewModel
 
-        val adapter = NotesListAdapter()
+        val adapter = NotesListAdapter(NoteListener { id ->
+            notesViewModel.onNoteClicked(id)
+        })
         binding.notesList.adapter = adapter
 
         notesViewModel.notes.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.submitList(it)
+                adapter.addHeaderAndSubmitList(it)
             }
         })
 
         binding.setLifecycleOwner( this )
+
+//        notesViewModel.navigateToEditNote.observe(this, Observer { note ->
+//            note?.let {
+//                this.findNavController().navigate(
+//                    NotesFragmentDirections
+//                        .actionNotesFragmentToEditNoteFragment(note))
+//                notesViewModel.onEditNoteNavigated()
+//            }
+//        })
 
         return binding.root
     }

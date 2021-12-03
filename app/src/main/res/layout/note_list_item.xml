@@ -7,6 +7,9 @@
         <variable
             name="note"
             type="hu.unideb.noteit.database.Note" />
+        <variable
+            name="clickListener"
+            type="hu.unideb.noteit.notes.NoteListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +19,8 @@
         android:background="@color/color_primary"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp">
+        android:layout_marginEnd="10dp"
+        android:onClick="@{() -> clickListener.onClick(note)}">
 
         <TextView
             android:id="@+id/viewNoteTitle"

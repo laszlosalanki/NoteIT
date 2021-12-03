@@ -1,65 +1,79 @@
 package hu.unideb.noteit.notes
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import hu.unideb.noteit.R
 import hu.unideb.noteit.database.Note
 import hu.unideb.noteit.databinding.NoteListItemBinding
-import java.text.DateFormat
-import java.text.SimpleDateFormat
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.lang.ClassCastException
 
-//First, manual attempt for the adapter
+private val ITEM_VIEW_TYPE_HEADER = 0
+private val ITEM_VIEW_TYPE_ITEM = 1
 
-/*class NotesListAdapter(private val context: Context, private val dataSet: ArrayList<Note>) :
-    RecyclerView.Adapter<NotesListAdapter.NotesListViewHolder>() {
+class NotesListAdapter(val clickListener: NoteListener) :
+    ListAdapter<DataItem, RecyclerView.ViewHolder>(NotesDiffCallback()) {
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): NotesListViewHolder {
-        val itemView = LayoutInflater.from(context).inflate(R.layout.note_list_item, parent, false)
-        return NotesListViewHolder(itemView)
+    private val adapterScope = CoroutineScope(Dispatchers.Default)
+
+    fun addHeaderAndSubmitList(list: List<Note>?) {
+        adapterScope.launch {
+            val items = when (list) {
+                null -> listOf(DataItem.Header)
+                else -> listOf(DataItem.Header) + list.map{DataItem.NoteItem(it)}
+            }
+            withContext(Dispatchers.Main) {
+                submitList(items)
+            }
+        }
     }
 
-    override fun onBindViewHolder(holder: NotesListViewHolder, position: Int) {
-        holder.noteName?.text = dataSet[position].title
-        //holder.dateOfCreation?.text = dataSet[position].creationTime.time.toString()
-        val formattedDateTime: String = DateFormat.getDateTimeInstance().format(dataSet[position].creationTime)
-        holder.dateOfCreation?.text = formattedDateTime
-        holder.category?.text = dataSet[position].category
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder) {
+            is ViewHolder -> {
+                val noteItem = getItem(position) as DataItem.NoteItem
+                holder.bind(noteItem.note, clickListener)
+            }
+        }
     }
 
-    override fun getItemCount(): Int {
-        return dataSet.count()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            ITEM_VIEW_TYPE_HEADER -> TextViewHolder.from(parent)
+            ITEM_VIEW_TYPE_ITEM -> ViewHolder.from(parent)
+            else -> throw ClassCastException("Unknown viewType ${viewType}")
+        }
     }
 
-    class NotesListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var noteName: TextView? = itemView.findViewById(R.id.viewNoteTitle)
-        var dateOfCreation: TextView? = itemView.findViewById(R.id.viewCreationDate)
-        var category: TextView? = itemView.findViewById(R.id.viewCategory)
-    }
-}*/
-
-class NotesListAdapter : ListAdapter<Note, NotesListAdapter.ViewHolder>(NotesDiffCallback()) {
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.bind(item)
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is DataItem.Header -> ITEM_VIEW_TYPE_HEADER
+            is DataItem.NoteItem -> ITEM_VIEW_TYPE_ITEM
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+    class TextViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        companion object {
+            fun from(parent: ViewGroup): TextViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val view = layoutInflater.inflate(R.layout.header, parent, false)
+                return TextViewHolder(view)
+            }
+        }
     }
 
     class ViewHolder private constructor(val binding: NoteListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Note) {
+        fun bind(item: Note, clickListener: NoteListener) {
             binding.note = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
@@ -73,12 +87,29 @@ class NotesListAdapter : ListAdapter<Note, NotesListAdapter.ViewHolder>(NotesDif
     }
 }
 
-class NotesDiffCallback : DiffUtil.ItemCallback<Note>() {
-    override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
+class NotesDiffCallback : DiffUtil.ItemCallback<DataItem>() {
+    override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
+    @SuppressLint("DiffUtilEquals")
+    override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
         return oldItem == newItem
     }
+}
+
+class NoteListener(val clickListener: (id: Long) -> Unit) {
+    fun onClick(note: Note) = clickListener(note.id)
+}
+
+sealed class DataItem {
+    data class NoteItem(val note: Note): DataItem() {
+        override val id = note.id
+    }
+
+    object Header: DataItem() {
+        override val id = Long.MIN_VALUE
+    }
+
+    abstract val id: Long
 }

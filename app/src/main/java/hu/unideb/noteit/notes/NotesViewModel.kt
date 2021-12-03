@@ -20,26 +20,6 @@ class NotesViewModel(
 
     val notes = dataBase.getAllNotesIdOrdered()
 
-    fun onAddNotePressed() {
-        viewModelScope.launch {
-            val newNote = Note()
-            insert(newNote)
-            actNote.value = getActNoteFromDatabase()
-        }
-    }
-
-    fun onSaveNotePressed() {
-        viewModelScope.launch {
-            val oldNote = actNote.value ?: return@launch
-
-            oldNote.title = "Note"
-
-            update(oldNote)
-
-            _navigateToEditNote.value = oldNote
-        }
-    }
-
     fun onSaveNote() {
         viewModelScope.launch {
             val newNote = Note()
@@ -53,14 +33,18 @@ class NotesViewModel(
         }
     }
 
-    private val _navigateToEditNote = MutableLiveData<Note>()
+    private val _navigateToEditNote = MutableLiveData<Long>()
 
-    val navigateToEditNote: LiveData<Note>
+    val navigateToEditNote
         get() = _navigateToEditNote
 
-//    fun doneNavigating() {
-//        _navigateToEditNote.value = null
-//    }
+    fun onNoteClicked(id: Long) {
+        _navigateToEditNote.value = id
+    }
+
+    fun onEditNoteNavigated() {
+        _navigateToEditNote.value = null
+    }
 
     init {
         initializeNote()

@@ -23,7 +23,6 @@ abstract class NotesDatabase : RoomDatabase() {
                         NotesDatabase::class.java,
                         "notes_database"
                     )
-                        .allowMainThreadQueries()
                         .fallbackToDestructiveMigration()
                         .build()
                     INSTANCE = instance

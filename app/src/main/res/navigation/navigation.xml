@@ -26,10 +26,17 @@
     </fragment>
     <fragment
         android:id="@+id/editNoteFragment"
-        android:name="hu.unideb.noteit.edit_note.EditNoteFragment"
-        android:label="EditNoteFragment" >
+        android:name="hu.unideb.noteit.editnote.EditNoteFragment"
+        android:label="fragment_edit_note"
+        tools:layout="@layout/fragment_edit_note">
+        <argument
+            android:name="noteKey"
+            app:argType="long" />
         <action
             android:id="@+id/action_editNoteFragment_to_notesFragment"
-            app:destination="@id/notesFragment" />
+            app:destination="@id/notesFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/notesFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>
