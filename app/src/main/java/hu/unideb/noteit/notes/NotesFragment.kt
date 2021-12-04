@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.Observer
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
@@ -37,7 +36,6 @@ class NotesFragment : Fragment() {
 
         val notesViewModel = ViewModelProvider(this, viewModelFactory).get(NotesViewModel::class.java)
 
-
         val speedDialActionItemAddNote = SpeedDialActionItem.Builder(R.id.addNote, R.drawable.ic_baseline_add_24)
             .setLabel(R.string.add_note)
             .setFabImageTintColor(Color.WHITE)
@@ -56,7 +54,6 @@ class NotesFragment : Fragment() {
         binding.speedDial.setOnActionSelectedListener(SpeedDialView.OnActionSelectedListener { actionItem ->
             when(actionItem.id){
                 R.id.addNote -> {
-                    //notesViewModel.onSaveNote()
                     notesViewModel.onCreateNote()
                     return@OnActionSelectedListener false
                 }

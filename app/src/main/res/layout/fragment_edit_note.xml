@@ -12,8 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".editnote.EditNoteFragment"
-        android:background="@color/color_primary_dark">
+        android:background="@color/color_primary_dark"
+        tools:context=".editnote.EditNoteFragment">
 
         <TextView
             android:id="@+id/textView4"
@@ -33,20 +33,20 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
-            android:textColor="@color/color_primary_lighter"
+            android:background="@color/color_primary"
             android:hint="@string/example_shopping"
             android:maxLines="1"
             android:minHeight="48dp"
-            android:background="@color/color_primary"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:textColor="@color/color_primary_lighter"
             android:textColorHighlight="@color/color_secondary_light"
             android:textColorHint="@color/color_primary_light"
+            app:editNoteTitle="@{editNoteViewModel.note}"
             app:layout_constraintBottom_toBottomOf="@+id/textView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="@+id/textView4"
-            app:editNoteTitle="@{editNoteViewModel.note}"/>
+            app:layout_constraintTop_toTopOf="@+id/textView4" />
 
         <TextView
             android:id="@+id/textView5"
@@ -65,21 +65,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:background="@color/color_primary"
+            android:hint="@string/family"
+            android:maxLines="1"
+            android:minHeight="48dp"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:textColor="@color/color_primary_lighter"
-            android:maxLines="1"
-            android:minHeight="48dp"
-            android:background="@color/color_primary"
             android:textColorHighlight="@color/color_secondary_light"
             android:textColorHint="@color/color_primary_light"
+            app:editNoteCategory="@{editNoteViewModel.note}"
             app:layout_constraintBottom_toBottomOf="@+id/textView5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toTopOf="@+id/textView5"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:hint="@string/family"
-            app:editNoteCategory="@{editNoteViewModel.note}"/>
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <View
             android:id="@+id/viewLine"
@@ -98,18 +98,18 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            android:hint="@string/example_text"
+            android:layout_marginBottom="10dp"
+            android:background="@color/color_primary"
             android:gravity="start|top"
-            android:textColorHint="@color/color_primary_dark"
+            android:hint="@string/example_text"
             android:padding="5dp"
             android:textColor="@color/color_primary_lighter"
-            android:background="@color/color_primary"
-            android:layout_marginBottom="10dp"
+            android:textColorHint="@color/color_primary_dark"
+            app:editNoteText="@{editNoteViewModel.note}"
             app:layout_constraintBottom_toTopOf="@+id/viewLine1"
             app:layout_constraintEnd_toEndOf="@+id/viewLine"
             app:layout_constraintStart_toStartOf="@+id/viewLine"
-            app:layout_constraintTop_toBottomOf="@+id/viewLine"
-            app:editNoteText="@{editNoteViewModel.note}"/>
+            app:layout_constraintTop_toBottomOf="@+id/viewLine" />
 
         <View
             android:id="@+id/viewLine1"
@@ -127,34 +127,51 @@
             android:id="@+id/buttonSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/save"
-            android:onClick="@{()->editNoteViewModel.saveThings()}"
-            android:backgroundTint="@color/color_secondary"
             android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/color_secondary"
+            android:onClick="@{()->editNoteViewModel.saveThings()}"
+            android:text="@string/save"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/viewLine1" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/buttonInsertWeatherData" />
 
         <Button
             android:id="@+id/buttonDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/delete"
-            android:onClick="@{()->editNoteViewModel.deleteNote()}"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/color_secondary"
+            android:onClick="@{()->editNoteViewModel.deleteNote()}"
+            android:text="@string/delete"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/viewLine1" />
+            app:layout_constraintEnd_toStartOf="@+id/buttonClear"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/buttonClear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/clear"
             android:backgroundTint="@color/color_secondary"
+            android:text="@string/clear"
             app:layout_constraintBottom_toBottomOf="@+id/buttonDelete"
-            app:layout_constraintEnd_toStartOf="@+id/buttonSave"
+            app:layout_constraintEnd_toStartOf="@+id/buttonInsertWeatherData"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/buttonDelete"
             app:layout_constraintTop_toTopOf="@+id/buttonDelete" />
+
+        <Button
+            android:id="@+id/buttonInsertWeatherData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/color_secondary"
+            android:text="@string/weather"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonSave"
+            app:layout_constraintEnd_toStartOf="@+id/buttonSave"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/buttonClear"
+            app:layout_constraintTop_toTopOf="@+id/buttonSave" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

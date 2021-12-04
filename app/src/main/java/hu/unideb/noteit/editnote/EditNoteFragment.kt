@@ -11,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import hu.unideb.noteit.R
-import hu.unideb.noteit.database.Note
 import hu.unideb.noteit.database.NotesDatabase
 import hu.unideb.noteit.databinding.FragmentEditNoteBinding
 

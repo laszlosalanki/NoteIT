@@ -20,13 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fab_base" />
 
-    <com.leinardi.android.speeddial.SpeedDialView
-        android:id="@+id/fab_base2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fab_base1" />
-
     <TextView
         android:id="@+id/addNote"
         android:layout_width="wrap_content"
@@ -47,14 +40,5 @@
         android:layout_marginTop="32dp"
         android:layout_marginStart="32dp"/>
 
-    <TextView
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/test"
-        app:layout_constraintStart_toEndOf="@id/fab_base1"
-        app:layout_constraintTop_toBottomOf="@id/fab_base1"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="32dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

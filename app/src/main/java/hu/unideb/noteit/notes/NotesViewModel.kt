@@ -1,8 +1,6 @@
 package hu.unideb.noteit.notes
 
 import android.app.Application
-import android.provider.SyncStateContract.Helpers.insert
-import androidx.lifecycle.LiveData
 import hu.unideb.noteit.database.Note
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -64,10 +62,6 @@ class NotesViewModel(
 
     private suspend fun insert(note: Note) {
         dataBase.insert(note)
-    }
-
-    private suspend fun update(note: Note) {
-        dataBase.update(note)
     }
 
     suspend fun clear() {

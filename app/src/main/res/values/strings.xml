@@ -20,4 +20,5 @@
     <string name="edit_note">Edit note</string>
     <string name="family">Family</string>
     <string name="example_text">Example text</string>
+    <string name="weather">Weather</string>
 </resources>
