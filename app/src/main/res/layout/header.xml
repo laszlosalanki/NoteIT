@@ -3,12 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceLarge"
-    android:layout_marginStart="16dp"
+    android:layout_marginStart="10dp"
     android:layout_marginTop="16dp"
-    android:layout_marginEnd="16dp"
-    android:padding="8dp"
+    android:layout_marginEnd="10dp"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
     android:text="@string/my_notes"
     android:background="@color/color_primary"
-    android:textColor="@color/white">
+    android:textColor="@color/color_secondary">
 
 </TextView>

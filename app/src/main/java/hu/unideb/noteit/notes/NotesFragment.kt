@@ -23,9 +23,8 @@ class NotesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //Show the previously hidden actionbar
+        // Show the previously hidden actionbar
         (activity as AppCompatActivity).title = getString(R.string.my_notes)
-        //(activity as AppCompatActivity).supportActionBar?.show()
         (activity as AppCompatActivity).supportActionBar?.hide()
 
         val binding: FragmentNotesBinding = DataBindingUtil.inflate(
@@ -51,15 +50,8 @@ class NotesFragment : Fragment() {
             .setLabelClickable(true)
             .create()
 
-//        val speedDialActionItemTest = SpeedDialActionItem.Builder(R.id.test, R.drawable.ic_baseline_architecture_24)
-//            .setLabel(R.string.test)
-//            .setFabImageTintColor(Color.WHITE)
-//            .setLabelClickable(true)
-//            .create()
-
         binding.speedDial.addActionItem(speedDialActionItemAddNote)
         binding.speedDial.addActionItem(speedDialActionItemClearNotes)
-        //binding.speedDial.addActionItem(speedDialActionItemTest)
 
         binding.speedDial.setOnActionSelectedListener(SpeedDialView.OnActionSelectedListener { actionItem ->
             when(actionItem.id){
@@ -71,18 +63,14 @@ class NotesFragment : Fragment() {
                     notesViewModel.onClear()
                     return@OnActionSelectedListener false
                 }
-//                R.id.test -> {
-//                    val navOptions = NavOptions.Builder().setPopUpTo(R.id.editNoteFragment, true).build()
-//                    findNavController().navigate(NotesFragmentDirections.actionNotesFragmentToEditNoteFragment(), navOptions)
-//                }
             }
             false
         })
 
         binding.notesViewModel = notesViewModel
 
-        val adapter = NotesListAdapter(NoteListener { id ->
-            notesViewModel.onNoteClicked(id)
+        val adapter = NotesListAdapter(NoteListener { noteId ->
+            notesViewModel.onNoteClicked(noteId)
         })
         binding.notesList.adapter = adapter
 
@@ -94,14 +82,14 @@ class NotesFragment : Fragment() {
 
         binding.setLifecycleOwner( this )
 
-//        notesViewModel.navigateToEditNote.observe(this, Observer { note ->
-//            note?.let {
-//                this.findNavController().navigate(
-//                    NotesFragmentDirections
-//                        .actionNotesFragmentToEditNoteFragment(note))
-//                notesViewModel.onEditNoteNavigated()
-//            }
-//        })
+        notesViewModel.navigateToEditNote.observe(this, Observer { note ->
+            note?.let {
+                this.findNavController().navigate(
+                    NotesFragmentDirections
+                        .actionNotesFragmentToEditNoteFragment(note))
+                notesViewModel.onEditNoteNavigated()
+            }
+        })
 
         return binding.root
     }

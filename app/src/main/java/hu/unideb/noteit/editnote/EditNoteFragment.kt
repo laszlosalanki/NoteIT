@@ -26,10 +26,10 @@ class EditNoteFragment : Fragment() {
         )
 
         val application = requireNotNull(this.activity).application
-        //val agruments = EditNoteFragmentArgs.fromBundle(arguments)
+        val arguments = EditNoteFragmentArgs.fromBundle(arguments)
 
         val dataSource = NotesDatabase.getInstance(application).notesDatabaseDao
-        val viewModelFactory = EditNoteViewModelFactory(/*arguments.noteKey*/0L, dataSource)
+        val viewModelFactory = EditNoteViewModelFactory(arguments.noteKey, dataSource)
 
         val editNoteViewModel = ViewModelProvider(this, viewModelFactory).get(EditNoteViewModel::class.java)
 
@@ -37,9 +37,7 @@ class EditNoteFragment : Fragment() {
             requireNotNull(activity).applicationContext,
             R.array.categories_array,
             R.layout.spinner_item
-            //android.R.layout.simple_spinner_item
         ).also { adapter ->
-            //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
             binding.spinnerCategories.adapter = adapter
         }
@@ -51,14 +49,14 @@ class EditNoteFragment : Fragment() {
         binding.editNoteViewModel = editNoteViewModel
         binding.setLifecycleOwner(this)
 
-//        editNoteViewModel.navigateToNotesFragment.observe(this, Observer {
-//            if (it == true) {
-//                this.findNavController().navigate(
-//                    EditNoteFragmentDirections.actionEditNoteFragmentToNotesFragment()
-//                )
-//                editNoteViewModel.doneNavigating()
-//            }
-//        })
+        editNoteViewModel.navigateToNotesFragment.observe(this, Observer {
+            if (it == true) {
+                this.findNavController().navigate(
+                    EditNoteFragmentDirections.actionEditNoteFragmentToNotesFragment()
+                )
+                editNoteViewModel.doneNavigating()
+            }
+        })
 
         return binding.root
     }

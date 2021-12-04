@@ -34,7 +34,6 @@ class NotesViewModel(
     }
 
     private val _navigateToEditNote = MutableLiveData<Long>()
-
     val navigateToEditNote
         get() = _navigateToEditNote
 
