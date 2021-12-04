@@ -56,7 +56,8 @@ class NotesFragment : Fragment() {
         binding.speedDial.setOnActionSelectedListener(SpeedDialView.OnActionSelectedListener { actionItem ->
             when(actionItem.id){
                 R.id.addNote -> {
-                    notesViewModel.onSaveNote()
+                    //notesViewModel.onSaveNote()
+                    notesViewModel.onCreateNote()
                     return@OnActionSelectedListener false
                 }
                 R.id.clearNotes -> {

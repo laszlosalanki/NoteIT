@@ -73,4 +73,14 @@ class NotesViewModel(
     suspend fun clear() {
         dataBase.clear()
     }
+
+    fun onCreateNote() {
+        viewModelScope.launch {
+            val newNote = Note()
+
+            insert(newNote)
+
+            actNote.value = getActNoteFromDatabase()
+        }
+    }
 }

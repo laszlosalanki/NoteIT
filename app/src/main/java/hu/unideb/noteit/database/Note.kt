@@ -11,9 +11,9 @@ data class Note(
     @ColumnInfo(name = "title")
     var title: String = "Note",
     @ColumnInfo(name = "creation_time")
-    val creationTime: Long = System.currentTimeMillis(),
+    var creationTime: Long = System.currentTimeMillis(),
     @ColumnInfo(name = "category")
-    val category: String = "Base",
+    var category: String = "Base",
     @ColumnInfo(name = "text")
-    val text: String = "Blank"
+    var text: String = "Blank"
 )

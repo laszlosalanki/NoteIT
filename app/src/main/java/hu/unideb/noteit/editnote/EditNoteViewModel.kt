@@ -3,23 +3,21 @@ package hu.unideb.noteit.editnote
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import hu.unideb.noteit.database.Note
 import hu.unideb.noteit.database.NotesDatabaseDao
-import kotlinx.coroutines.Job
+import hu.unideb.noteit.databinding.FragmentEditNoteBinding
+import kotlinx.coroutines.launch
 
 class EditNoteViewModel(
     private val noteKey: Long = 0L,
-    dataSource: NotesDatabaseDao) : ViewModel() {
+    dataSource: NotesDatabaseDao,
+    val binding: FragmentEditNoteBinding) : ViewModel() {
 
     val dataBase = dataSource
-    private val viewModelJob = Job()
     private val note: LiveData<Note>
 
     fun getNote() = note
-
-    fun getNoteAsString(): String? {
-        return note.value?.text
-    }
 
     init {
         note = dataBase.getNoteWithId(noteKey)
@@ -29,16 +27,38 @@ class EditNoteViewModel(
     val navigateToNotesFragment: LiveData<Boolean?>
         get() = _navigateToNotesFragment
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
-    }
-
     fun doneNavigating() {
         _navigateToNotesFragment.value = null
     }
 
-    fun onClose() {
-        _navigateToNotesFragment.value = true
+    private suspend fun update(note: Note) {
+        dataBase.update(note)
     }
+
+    private suspend fun delete(id: Long)
+    {
+        dataBase.deleteById(id)
+    }
+
+    fun saveThings() {
+        viewModelScope.launch {
+            val actNote = dataBase.get(noteKey)
+            actNote?.title = binding.editTextTitle.text.toString()
+            actNote?.category = binding.editTextCategories.text.toString()
+            actNote?.text = binding.editTextNote.text.toString()
+            actNote?.creationTime = System.currentTimeMillis()
+
+            if (actNote != null) {
+                update(actNote)
+            }
+        }
+    }
+
+    fun deleteNote() {
+        viewModelScope.launch {
+            delete(noteKey)
+            _navigateToNotesFragment.value = true
+        }
+    }
+
 }

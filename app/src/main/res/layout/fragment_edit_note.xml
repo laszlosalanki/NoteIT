@@ -35,7 +35,6 @@
             android:layout_marginEnd="10dp"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
-            android:text="@{editNoteViewModel.noteAsString}"
             android:textColor="@color/color_primary_lighter"
             android:hint="@string/example_shopping"
             android:maxLines="1"
@@ -46,7 +45,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/textView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toTopOf="@+id/textView4" />
+            app:layout_constraintTop_toTopOf="@+id/textView4"
+            app:editNoteTitle="@{editNoteViewModel.note}"/>
 
         <TextView
             android:id="@+id/textView5"
@@ -59,21 +59,27 @@
             app:layout_constraintStart_toStartOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <Spinner
-            android:id="@+id/spinnerCategories"
+        <EditText
+            android:id="@+id/editTextCategories"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:minHeight="48dp"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
+            android:textColor="@color/color_primary_lighter"
+            android:maxLines="1"
+            android:minHeight="48dp"
             android:background="@color/color_primary"
+            android:textColorHighlight="@color/color_secondary_light"
+            android:textColorHint="@color/color_primary_light"
             app:layout_constraintBottom_toBottomOf="@+id/textView5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toTopOf="@+id/textView5"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            android:hint="@string/family"
+            app:editNoteCategory="@{editNoteViewModel.note}"/>
 
         <View
             android:id="@+id/viewLine"
@@ -92,7 +98,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
-            android:hint="Example text"
+            android:hint="@string/example_text"
             android:gravity="start|top"
             android:textColorHint="@color/color_primary_dark"
             android:padding="5dp"
@@ -102,7 +108,8 @@
             app:layout_constraintBottom_toTopOf="@+id/viewLine1"
             app:layout_constraintEnd_toEndOf="@+id/viewLine"
             app:layout_constraintStart_toStartOf="@+id/viewLine"
-            app:layout_constraintTop_toBottomOf="@+id/viewLine" />
+            app:layout_constraintTop_toBottomOf="@+id/viewLine"
+            app:editNoteText="@{editNoteViewModel.note}"/>
 
         <View
             android:id="@+id/viewLine1"
@@ -121,6 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save"
+            android:onClick="@{()->editNoteViewModel.saveThings()}"
             android:backgroundTint="@color/color_secondary"
             android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -131,6 +139,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/delete"
+            android:onClick="@{()->editNoteViewModel.deleteNote()}"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/color_secondary"
             app:layout_constraintBottom_toBottomOf="parent"
