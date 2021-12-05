@@ -1,5 +1,6 @@
 package hu.unideb.noteit.editnote
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,7 +8,11 @@ import androidx.lifecycle.viewModelScope
 import hu.unideb.noteit.database.Note
 import hu.unideb.noteit.database.NotesDatabaseDao
 import hu.unideb.noteit.databinding.FragmentEditNoteBinding
+import hu.unideb.noteit.network.Comic
+import hu.unideb.noteit.network.ComicApi
 import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.*
 
 class EditNoteViewModel(
     private val noteKey: Long = 0L,
@@ -21,6 +26,16 @@ class EditNoteViewModel(
 
     init {
         note = dataBase.getNoteWithId(noteKey)
+    }
+
+    private fun getComics() {
+        viewModelScope.launch {
+            try {
+                val comics: List<Comic> = ComicApi.retrofitService.getProperties()
+            } catch (e: Exception) {
+                Log.e("EditNoteViewModel", "getComics: error: " + e.message)
+            }
+        }
     }
 
     private val _navigateToNotesFragment = MutableLiveData<Boolean?>()

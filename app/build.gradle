@@ -60,8 +60,13 @@ dependencies {
     implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
 
-    //SpeedDial
+    // SpeedDial
     implementation "com.leinardi.android:speed-dial:3.2.0"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
+    implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
+    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
 
 //    //Test
 //    testImplementation 'junit:junit:4.+'
