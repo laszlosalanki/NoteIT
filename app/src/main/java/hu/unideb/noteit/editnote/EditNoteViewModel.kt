@@ -1,10 +1,7 @@
 package hu.unideb.noteit.editnote
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import hu.unideb.noteit.database.Note
 import hu.unideb.noteit.database.NotesDatabaseDao
 import hu.unideb.noteit.databinding.FragmentEditNoteBinding
@@ -25,7 +22,9 @@ class EditNoteViewModel(
     fun getNote() = note
 
     init {
-        note = dataBase.getNoteWithId(noteKey)
+        note = Transformations.map(dataBase.getNoteWithId(noteKey)){
+            it
+        }
     }
 
     fun getComics() {
