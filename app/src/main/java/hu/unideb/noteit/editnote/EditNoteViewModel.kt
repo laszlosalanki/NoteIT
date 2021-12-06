@@ -28,13 +28,11 @@ class EditNoteViewModel(
         note = dataBase.getNoteWithId(noteKey)
     }
 
-    private fun getComics() {
+    fun getComics() {
         viewModelScope.launch {
-            try {
-                val comics: List<Comic> = ComicApi.retrofitService.getProperties()
-            } catch (e: Exception) {
-                Log.e("EditNoteViewModel", "getComics: error: " + e.message)
-            }
+            val comic: Comic = ComicApi.retrofitService.getProperties()
+            val toEditText = comic.alt + '\n' + comic.img
+            binding.editTextNote.setText(toEditText)
         }
     }
 

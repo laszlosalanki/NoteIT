@@ -1,5 +1,6 @@
 package hu.unideb.noteit.network
 
+import androidx.lifecycle.LiveData
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -20,7 +21,7 @@ private val retrofit = Retrofit.Builder()
 
 interface ComicApiService {
     @GET("info.0.json")
-    suspend fun getProperties(): List<Comic>
+    suspend fun getProperties(): Comic
 }
 object ComicApi {
     val retrofitService: ComicApiService by lazy {

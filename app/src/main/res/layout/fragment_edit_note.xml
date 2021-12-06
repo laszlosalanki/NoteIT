@@ -134,7 +134,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/buttonInsertWeatherData" />
+            app:layout_constraintStart_toEndOf="@+id/buttonGetComic" />
 
         <Button
             android:id="@+id/buttonDelete"
@@ -156,17 +156,18 @@
             android:backgroundTint="@color/color_secondary"
             android:text="@string/clear"
             app:layout_constraintBottom_toBottomOf="@+id/buttonDelete"
-            app:layout_constraintEnd_toStartOf="@+id/buttonInsertWeatherData"
+            app:layout_constraintEnd_toStartOf="@+id/buttonGetComic"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/buttonDelete"
             app:layout_constraintTop_toTopOf="@+id/buttonDelete" />
 
         <Button
-            android:id="@+id/buttonInsertWeatherData"
+            android:id="@+id/buttonGetComic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/color_secondary"
             android:text="@string/comic"
+            android:onClick="@{() -> editNoteViewModel.getComics()}"
             app:layout_constraintBottom_toBottomOf="@+id/buttonSave"
             app:layout_constraintEnd_toStartOf="@+id/buttonSave"
             app:layout_constraintHorizontal_bias="0.5"

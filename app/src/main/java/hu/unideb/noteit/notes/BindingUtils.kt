@@ -5,6 +5,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import hu.unideb.noteit.database.Note
+import hu.unideb.noteit.network.Comic
 import java.text.DateFormat
 
 @BindingAdapter("title")
